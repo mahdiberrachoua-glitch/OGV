@@ -1,0 +1,281 @@
+body {
+  margin: 0;
+  font-family: 'Amiri', serif;
+  color: white;
+  background-color: #1a1a1a;
+  background-image: url('images/mosque-night.jpg'); /* Standard: Dark Mode */
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.container {
+  text-align: right;
+  margin-right: 50px;
+}
+
+header {
+  background-color: rgba(0,0,0,0.5);
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.3s;
+  backdrop-filter: blur(6px);
+}
+
+#prayerTimes {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.prayer {
+  background-color: rgba(0,0,0,0.5);
+  padding: 15px 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.3s;
+  backdrop-filter: blur(6px);
+}
+
+.prayer .icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#countdownSection {
+  text-align: center;
+  background-color: rgba(0,0,0,0.5);
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 500px;
+  border-radius: 10px;
+  transition: box-shadow 0.3s;
+  backdrop-filter: blur(6px);
+}
+
+/* ☀️ Light Mode */
+body.light {
+  background-image: url("images/mosque-day.jpg");
+  background-size: cover;
+  color: #111;
+}
+
+body.light header,
+body.light .prayer,
+body.light #countdownSection {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 0 12px rgba(255, 200, 0, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+body.light header:hover,
+body.light .prayer:hover,
+body.light #countdownSection:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.6),
+              0 0 40px rgba(255, 150, 0, 0.4);
+}
+
+/* 🌙 Dark Mode */
+body.dark {
+  background-image: url("images/mosque-night.jpg");
+  background-size: cover;
+  color: #eee;
+}
+
+body.dark header,
+body.dark .prayer,
+body.dark #countdownSection {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+body.dark header:hover,
+body.dark .prayer:hover,
+body.dark #countdownSection:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 255, 200, 0.6),
+              0 0 40px rgba(0, 255, 200, 0.4);
+}
+
+/* 🔘 Buttons oben rechts */
+.top-buttons {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.top-buttons button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  position: relative;
+}
+
+.top-buttons button:hover {
+  background: rgba(255,255,255,0.4);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0,255,200,0.5);
+}
+
+/* Tooltip */
+.top-buttons button::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 5px 8px;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.top-buttons button:hover::after {
+  opacity: 1;
+}
+
+/* ⚙️ Seitenpanel */
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100%;
+  background: #111;
+  color: white;
+  padding: 20px;
+  box-shadow: -3px 0 15px rgba(0,0,0,0.6);
+  transition: right 0.4s ease;
+  z-index: 2001;
+}
+
+.settings-panel.active {
+  right: 0;
+}
+
+.settings-panel h2 {
+  margin-top: 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 10px;
+}
+
+.panel-content {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.settings-panel button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.settings-panel button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: crimson;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: darkred;
+}
+
+/* 🕌 Overlay */
+#prayerOverlay {
+  position: fixed;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 40%;
+  z-index: 3000;
+  box-shadow: 0 0 25px rgba(0,255,200,0.5);
+}
+
+#prayerText {
+  font-size: 2rem;
+  line-height: 1.6;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+/* ⏳ Countdown Overlay */
+#countdownOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: url("images/countdown-bg.jpg") no-repeat center center/cover;
+  z-index: 4000;
+}
+
+#countdownOverlay #countdownText {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 12px rgba(0,0,0,0.8), 0 0 25px #0ff;
+  font-family: 'Amiri', serif;
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(0,0,0,0.5);
+}
